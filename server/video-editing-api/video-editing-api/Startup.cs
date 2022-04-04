@@ -72,7 +72,7 @@ namespace video_editing_api
 
             app.UseCors(_myAllowSpecificOrigins);
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
