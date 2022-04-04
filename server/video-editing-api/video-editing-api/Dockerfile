@@ -3,13 +3,15 @@
 FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
 WORKDIR /app
 EXPOSE 80
-EXPOSE 443
+#EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 COPY ["video-editing-api/video-editing-api.csproj", "video-editing-api/"]
 RUN dotnet restore "video-editing-api/video-editing-api.csproj"
 COPY . .
+RUN dotnet dev-certs https --clean
+RUN dotnet dev-certs https -t
 WORKDIR "/src/video-editing-api"
 RUN dotnet build "video-editing-api.csproj" -c Release -o /app/build
 
